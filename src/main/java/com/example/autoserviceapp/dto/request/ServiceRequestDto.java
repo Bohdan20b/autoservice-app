@@ -3,10 +3,8 @@ package com.example.autoserviceapp.dto.request;
 import com.example.autoserviceapp.model.ServiceObject;
 import java.math.BigDecimal;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class ServiceRequestDto {
     private Long orderId;
     private Long masterId;
