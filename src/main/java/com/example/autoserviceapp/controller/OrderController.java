@@ -5,12 +5,12 @@ import com.example.autoserviceapp.dto.mapper.ResponseDtoMapper;
 import com.example.autoserviceapp.dto.request.CommodityRequestDto;
 import com.example.autoserviceapp.dto.request.OrderRequestDto;
 import com.example.autoserviceapp.dto.request.StatusRequestDto;
-import com.example.autoserviceapp.dto.response.CommodityResponseDto;
 import com.example.autoserviceapp.dto.response.OrderResponseDto;
 import com.example.autoserviceapp.model.Commodity;
 import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.model.Order.Status;
 import com.example.autoserviceapp.service.OrderService;
+import io.swagger.annotations.ApiOperation;
 import java.math.BigDecimal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,12 +41,14 @@ public class OrderController {
     }
 
     @PostMapping
+    @ApiOperation("Create new order")
     public OrderResponseDto create(@RequestBody OrderRequestDto dto) {
         Order order = orderRequestMapper.mapToModel(dto);
         return orderResponseMapper.mapToDto(orderService.add(order));
     }
 
     @PostMapping("/{id}")
+    @ApiOperation("Update order by id")
     public OrderResponseDto update(@PathVariable Long id, @RequestBody OrderRequestDto dto) {
         Order order = orderRequestMapper.mapToModel(dto);
         order.setId(id);
@@ -54,19 +56,24 @@ public class OrderController {
     }
 
     @PostMapping("/{id}/commodity")
-    public OrderResponseDto addCommodityByOrderId(@PathVariable Long id, @RequestBody CommodityRequestDto dto) {
+    @ApiOperation("Add new commodity to the order by order id")
+    public OrderResponseDto addCommodityByOrderId(@PathVariable Long id,
+            @RequestBody CommodityRequestDto dto) {
         Commodity commodity = commodityRequestMapper.mapToModel(dto);
         return orderResponseMapper.mapToDto(orderService.addCommodity(id, commodity));
     }
 
     @GetMapping("/{id}/update-status")
-    public OrderResponseDto updateStatus(@PathVariable Long id, @RequestBody StatusRequestDto dto) {
+    @ApiOperation("Update the order status by order id")
+    public OrderResponseDto updateStatus(@PathVariable Long id,
+            @RequestBody StatusRequestDto dto) {
         Order.Status status = statusRequestMapper.mapToModel(dto);
         return orderResponseMapper.mapToDto(orderService.updateStatus(id, status));
     }
 
     @GetMapping("/{id}/price")
-    public BigDecimal countPrice(@PathVariable Long id){
+    @ApiOperation("Get total price by order id")
+    public BigDecimal countPrice(@PathVariable Long id) {
         return orderService.countPrice(id);
     }
 }

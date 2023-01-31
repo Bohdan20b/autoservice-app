@@ -8,15 +8,18 @@ import com.example.autoserviceapp.dto.response.OrderResponseDto;
 import com.example.autoserviceapp.model.Master;
 import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.service.MasterService;
+import io.swagger.annotations.ApiOperation;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/masters")
 public class MasterController {
     private final MasterService masterService;
     private final RequestDtoMapper<MasterRequestDto, Master> requestDtoMapper;
@@ -34,12 +37,14 @@ public class MasterController {
     }
 
     @PostMapping
+    @ApiOperation("Create a new master")
     public MasterResponseDto create(@RequestBody MasterRequestDto dto) {
         Master master = masterService.add(requestDtoMapper.mapToModel(dto));
         return responseDtoMapper.mapToDto(master);
     }
 
     @PostMapping("/{id}")
+    @ApiOperation("Update master by id")
     public MasterResponseDto update(@PathVariable Long id, @RequestBody MasterRequestDto dto) {
         Master master = requestDtoMapper.mapToModel(dto);
         master.setId(id);
@@ -47,6 +52,7 @@ public class MasterController {
     }
 
     @GetMapping("{id}/orders-by-id/")
+    @ApiOperation("Get all orders by masters id")
     public List<OrderResponseDto> getAllOrdersByMasterId(@PathVariable Long id) {
         return masterService.getOrdersList(id).stream()
                 .map(orderResponseDtoMapper::mapToDto)
@@ -54,6 +60,7 @@ public class MasterController {
     }
 
     @GetMapping("{id}/salary-by-id/")
+    @ApiOperation("Get salary for master by id")
     public BigDecimal countSalary(@PathVariable Long id) {
         return masterService.countSalary(id);
     }

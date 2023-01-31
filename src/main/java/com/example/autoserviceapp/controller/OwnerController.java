@@ -8,6 +8,7 @@ import com.example.autoserviceapp.dto.response.OwnerResponseDto;
 import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.model.Owner;
 import com.example.autoserviceapp.service.OwnerService;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,12 +35,14 @@ public class OwnerController {
     }
 
     @PostMapping
+    @ApiOperation("Create new owner")
     public OwnerResponseDto create(@RequestBody OwnerRequestDto dto) {
         Owner owner = ownerService.add(ownerRequestMapper.mapToModel(dto));
         return onwerResponseMapper.mapToDto(owner);
     }
 
     @PostMapping("/{id}")
+    @ApiOperation("Update owner by id")
     public OwnerResponseDto update(@PathVariable Long id, @RequestBody OwnerRequestDto dto) {
         Owner owner = ownerRequestMapper.mapToModel(dto);
         owner.setId(id);
@@ -47,6 +50,7 @@ public class OwnerController {
     }
 
     @PostMapping("/{id}/orders")
+    @ApiOperation("Get all orders by owner id")
     public List<OrderResponseDto> getAllOrdersByOwnerId(@PathVariable Long id) {
         return ownerService.getOrdersList(id).stream()
                 .map(orderResponseMapper::mapToDto)
