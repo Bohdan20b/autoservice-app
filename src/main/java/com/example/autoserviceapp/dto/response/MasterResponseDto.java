@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 public class MasterResponseDto {
     private Long id;
-    private String fullName;
+    private String name;
     private List<Long> completeOrdersId;
 }

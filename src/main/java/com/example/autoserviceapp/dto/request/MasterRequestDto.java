@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 public class MasterRequestDto {
-    private String fullName;
+    private String name;
     private List<Long> completeOrders;
 }

@@ -10,5 +10,6 @@ public interface ServiceObjectService {
 
     ServiceObject updateServiceStatus(Long id, ServiceObject.ServiceStatus status);
 
-    List<ServiceObject> getAllByMasterIdAndStatus(Long masterId, ServiceObject.ServiceStatus status);
+    List<ServiceObject> getAllByMasterIdAndStatus(Long masterId,
+            ServiceObject.ServiceStatus status);
 }

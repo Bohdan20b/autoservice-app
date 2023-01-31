@@ -1,6 +1,5 @@
 package com.example.autoserviceapp.model;
 
-
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

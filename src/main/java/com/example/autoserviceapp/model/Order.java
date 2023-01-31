@@ -1,6 +1,5 @@
 package com.example.autoserviceapp.model;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,7 +33,7 @@ public class Order {
     @Column(name = "accept_time")
     private LocalDateTime acceptTime;
     @OneToMany
-    @JoinTable(name = "order_services",
+    @JoinTable(name = "orders_services",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id"))
     private List<ServiceObject> serviceList;
