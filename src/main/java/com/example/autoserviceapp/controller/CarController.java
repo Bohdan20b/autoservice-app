@@ -6,6 +6,7 @@ import com.example.autoserviceapp.dto.request.CarRequestDto;
 import com.example.autoserviceapp.dto.response.CarResponseDto;
 import com.example.autoserviceapp.model.Car;
 import com.example.autoserviceapp.service.CarService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +28,14 @@ public class CarController {
     }
 
     @PostMapping
-    public  CarResponseDto create(@RequestBody CarRequestDto dto) {
+    @ApiOperation("Create a new car")
+    public CarResponseDto create(@RequestBody CarRequestDto dto) {
         Car car = carService.add(requestMapper.mapToModel(dto));
         return responseMapper.mapToDto(car);
     }
 
     @PostMapping("/{id}")
+    @ApiOperation("Update car by id")
     public CarResponseDto update(@PathVariable Long id, @RequestBody CarRequestDto dto) {
         Car car = requestMapper.mapToModel(dto);
         car.setId(id);

@@ -17,7 +17,8 @@ public class MasterServiceImpl implements MasterService {
     private final MasterRepository masterRepository;
     private final ServiceObjectService serviceObjectService;
 
-    public MasterServiceImpl(MasterRepository masterRepository, ServiceObjectService serviceObjectService) {
+    public MasterServiceImpl(MasterRepository masterRepository,
+            ServiceObjectService serviceObjectService) {
         this.masterRepository = masterRepository;
         this.serviceObjectService = serviceObjectService;
     }

@@ -6,8 +6,8 @@ import com.example.autoserviceapp.dto.request.ServiceRequestDto;
 import com.example.autoserviceapp.dto.request.StatusRequestDto;
 import com.example.autoserviceapp.dto.response.ServiceResponseDto;
 import com.example.autoserviceapp.model.ServiceObject;
-import com.example.autoserviceapp.model.ServiceObject.ServiceStatus;
 import com.example.autoserviceapp.service.ServiceObjectService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,12 +34,14 @@ public class ServiceController {
     }
 
     @PostMapping
+    @ApiOperation("Create new service")
     public ServiceResponseDto create(@RequestBody ServiceRequestDto dto) {
         ServiceObject service = serviceRequestMapper.mapToModel(dto);
         return serviceResponseMapper.mapToDto(serviceObjectService.add(service));
     }
 
     @PostMapping("/{id}")
+    @ApiOperation("Update service by id")
     public ServiceResponseDto update(@PathVariable Long id, @RequestBody ServiceRequestDto dto) {
         ServiceObject service = serviceRequestMapper.mapToModel(dto);
         service.setId(id);
@@ -47,8 +49,11 @@ public class ServiceController {
     }
 
     @GetMapping("/{id}/status")
-    public ServiceResponseDto updateStatus(@PathVariable Long id, @RequestBody StatusRequestDto dto) {
+    @ApiOperation("Update service status by id")
+    public ServiceResponseDto updateStatus(@PathVariable Long id,
+            @RequestBody StatusRequestDto dto) {
         ServiceObject.ServiceStatus status = statusMapper.mapToModel(dto);
-        return serviceResponseMapper.mapToDto(serviceObjectService.updateServiceStatus(id, status));
+        return serviceResponseMapper.mapToDto(serviceObjectService
+                .updateServiceStatus(id, status));
     }
 }

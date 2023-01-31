@@ -6,6 +6,7 @@ import com.example.autoserviceapp.dto.request.CommodityRequestDto;
 import com.example.autoserviceapp.dto.response.CommodityResponseDto;
 import com.example.autoserviceapp.model.Commodity;
 import com.example.autoserviceapp.service.CommodityService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,13 +29,16 @@ public class CommodityController {
     }
 
     @PostMapping
+    @ApiOperation("Create a new commodity")
     public CommodityResponseDto create(@RequestBody CommodityRequestDto dto) {
         Commodity commodity = commodityService.add(requestMapper.mapToModel(dto));
         return responseMapper.mapToDto(commodity);
     }
 
     @PostMapping("/{id}")
-    public CommodityResponseDto update(@PathVariable Long id, @RequestBody CommodityRequestDto dto) {
+    @ApiOperation("Update commodity by id")
+    public CommodityResponseDto update(@PathVariable Long id,
+            @RequestBody CommodityRequestDto dto) {
         Commodity commodity = requestMapper.mapToModel(dto);
         commodity.setId(id);
         return responseMapper.mapToDto(commodityService.update(commodity));
