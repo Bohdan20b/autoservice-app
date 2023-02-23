@@ -6,6 +6,6 @@ import lombok.Getter;
 public class CarRequestDto {
     private String brand;
     private String model;
-    private int year;
+    private Integer year;
     private String series;
 }
