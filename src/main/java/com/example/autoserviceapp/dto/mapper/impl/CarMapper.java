@@ -26,6 +26,7 @@ public class CarMapper implements RequestDtoMapper<CarRequestDto, Car>,
         CarResponseDto dto = new CarResponseDto();
         dto.setId(car.getId());
         dto.setBrand(car.getBrand());
+        dto.setModel(car.getModel());
         dto.setYear(car.getYear());
         dto.setSeries(car.getSeries());
         return dto;

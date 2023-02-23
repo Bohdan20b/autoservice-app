@@ -14,6 +14,5 @@ public class OrderRequestDto {
     private List<Long> serviceIdList;
     private List<Long> commodityIdList;
     private Order.Status status;
-    private BigDecimal price;
     private LocalDateTime completeTime;
 }
